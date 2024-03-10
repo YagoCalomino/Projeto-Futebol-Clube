@@ -13,8 +13,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "paths": {
       "*": ["node_modules/*"]
     }
