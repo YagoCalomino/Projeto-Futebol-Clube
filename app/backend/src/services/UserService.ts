@@ -23,4 +23,12 @@ export default class UserService {
     }
     return { status: mapStatusHTTP.unauthorized, data: { message: 'Invalid email or password' } };
   }
+
+  public async getUserByRole(id: number) {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      return { status: mapStatusHTTP.notFound, data: { message: 'User not found' } };
+    }
+    return { status: mapStatusHTTP.successful, data: user };
+  }
 }

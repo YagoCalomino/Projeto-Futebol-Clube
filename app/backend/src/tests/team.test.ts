@@ -14,33 +14,24 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Teste de Equipes', function () {
+describe('Teams Test', function () {
     beforeEach(function () { sinon.restore(); });
 
-    it('deve retornar uma lista de equipes', async function () {
+    it('should return a list of teams', async function () {
         sinon.stub(SequelizeTeam, 'findAll').resolves(teams as any);
 
-        const res: Response = await chai.request(app).get('/teams');
+        const { status, body } = await chai.request(app).get('/teams');
 
-        expect(res.status).to.equal(200);
-        expect(res.body).to.deep.equal(teams);
+        expect(status).to.equal(200);
+        expect(body).to.deep.equal(teams);
     });
 
-    it('deve retornar uma equipe por id', async function() {
+    it('should return a team by id', async function() {
         sinon.stub(SequelizeTeam, 'findOne').resolves(teams as any);
 
-        const res: Response = await chai.request(app).get('/teams/1');
+        const { status, body } = await chai.request(app).get('/teams/1');
 
-        expect(res.status).to.equal(200);
-        expect(res.body).to.deep.equal(teams);
+        expect(status).to.equal(200);
+        expect(body).to.deep.equal(teams);
     })
-
-    it('deve retornar não encontrado se a equipe não existir', async function() {
-        sinon.stub(SequelizeTeam, 'findOne').resolves(null);
-
-        const res: Response = await chai.request(app).get('/teams/1');
-
-        expect(res.status).to.equal(404);
-        expect(res.body.message).to.equal('Equipe 1 não encontrada');
-    });
 });

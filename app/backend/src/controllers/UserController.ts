@@ -8,4 +8,10 @@ export default class UserController {
     const { status, data } = await this.userService.login(req.body);
     return res.status(status).json(data);
   }
+
+  public async getUserByRole(_req: Request, res: Response) {
+    const { id } = res.locals.payload;
+    const { status, data } = await this.userService.getUserByRole(id);
+    return res.status(status).json(data);
+  }
 }

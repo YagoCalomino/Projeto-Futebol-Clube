@@ -5,12 +5,17 @@ import {
   InferCreationAttributes,
   Model } from 'sequelize';
 import db from '.';
+import { IMatch } from '../../Interfaces/matches/IMatch';
 
 class SequelizeTeam extends Model<InferAttributes<SequelizeTeam>,
 InferCreationAttributes<SequelizeTeam>> {
   declare id: CreationOptional<number>;
 
   declare teamName: string;
+
+  declare homeTeam?: IMatch[];
+
+  declare awayTeam?: IMatch[];
 }
 
 SequelizeTeam.init({
