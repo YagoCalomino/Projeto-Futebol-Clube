@@ -8,8 +8,8 @@ export interface IMatch {
 }
 
 export interface newIMatch {
-homeTeamId: number,
-awayTeamId: number,
-homeTeamGoals: number,
-awayTeamGoals: number,
+  homeTeamId: number,
+  awayTeamId: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
 }
