@@ -1,37 +1,39 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
+import * as chai from "chai";
+import * as sinon from "sinon";
 // @ts-ignore
-import chaiHttp = require('chai-http');
+import chaiHttp = require("chai-http");
+import { app } from '../app'
+import { expect } from "chai";
 
-import { teams } from './mocks/Team.mocks.';
+import Teams from "../database/models/teamsModel";
+import teamMock from "./mocks/teamMock";
 
-import { app } from '../app';
-import SequelizeTeam from '../database/models/SequelizeTeam';
+describe("TeamsService", () => {
+  describe("getAll", () => {
+    it("should return all teams", async () => {
+      const TeamsMockModel = Teams.bulkBuild(teamMock)
 
-import { Response } from 'superagent';
+      const findAllStub = sinon.stub(Teams, "findAll").resolves(TeamsMockModel);
 
-chai.use(chaiHttp);
+      const result = await chai.request(app).get('/teams')
 
-const { expect } = chai;
+      expect(result.status).to.deep.equal(200);
 
-describe('Teams Test', function () {
-    beforeEach(function () { sinon.restore(); });
-
-    it('should return a list of teams', async function () {
-        sinon.stub(SequelizeTeam, 'findAll').resolves(teams as any);
-
-        const { status, body } = await chai.request(app).get('/teams');
-
-        expect(status).to.equal(200);
-        expect(body).to.deep.equal(teams);
+      sinon.restore();
     });
+  })
 
-    it('should return a team by id', async function() {
-        sinon.stub(SequelizeTeam, 'findOne').resolves(teams as any);
+  describe("getById", () => {
+    it("should return a team by id", async () => {
+      const TeamsMockModel = Teams.build(teamMock[0])
 
-        const { status, body } = await chai.request(app).get('/teams/1');
+      const findByPkStub = sinon.stub(Teams, "findByPk").resolves(TeamsMockModel);
 
-        expect(status).to.equal(200);
-        expect(body).to.deep.equal(teams);
-    })
+      const result = await chai.request(app).get('/teams/1')
+
+      expect(result.status).to.deep.equal(200);
+
+      sinon.restore();
+    });
+  })
 });
