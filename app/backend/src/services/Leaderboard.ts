@@ -90,7 +90,7 @@ export default class LeaderboardService {
 
   public async getLeaderboard() {
     const teams = await this.leaderboardModel.getTeams(); // Busca todos os times
-   
+
     const leaderboard = teams.map((team) => this.calculateTeamStats(team)); // Calcula as estatísticas para cada time
 
     return { status: mapStatusHTTP.successful, data: this.sortLeaderboard(leaderboard) }; // Retorna a tabela de classificação ordenada
