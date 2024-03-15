@@ -15,9 +15,10 @@ login.post('/login', emailPasswordValidations, (req: Request, res: Response) =>
 
 // Rota para obter a função do usuário
 // "tokenValidation" é um middleware que valida o token
-login.get('/login/role', tokenValidation, 
-  // "getRole" é um método no controlador de login
-  Login.getRole);
+login.get('/login/role', tokenValidation,
+
+// "getRole" é um método no controlador de login
+Login.getRole);
 
 // Exportando o roteador
 export default login;

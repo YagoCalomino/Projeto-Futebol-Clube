@@ -1,5 +1,5 @@
 interface ICustomError extends Error {
-    statusCode?: number;
-  }
-  
-  export default ICustomError;
+  statusCode?: number;
+}
+
+export default ICustomError;
