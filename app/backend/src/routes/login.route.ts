@@ -8,6 +8,6 @@ const login = Router();
 login.post('/login', emailPasswordValidations, (req: Request, res: Response) =>
   Login.login(req, res));
 
-login.get('/login/role', tokenValidation, Login.getRole); // teste de rota, mudar
+login.get('/login/role', tokenValidation, Login.getRole); //teste de rota, mudar
 
 export default login;
